@@ -41,58 +41,12 @@ int firstUniqChar(char* s) {
   //return res;
 }
 
-int firstUniqChar2(char* s) {
-  unsigned int occ[26];
-  int ind[26];
-  //memset(occ, 0, 26);
-  //memset(ind, -1, 26);
-
-  for (int i=0; i<26; i++) {
-    occ[i] = 0;
-    ind[i] = -1;
-  }
-  printf("\n");
-
-  char x = 'k';
-  int index = x - 97;
-  printf("index: %d \n", index);
-
-  for (int i=0; i<26; i++) {
-    char sumn = i + 97;
-    printf("%c: %d \n", sumn, occ[i]);
-  }
-  printf("\n");
-
-  unsigned int size = strlen(s);
-  for (short i=0; i<size; i++) {
-    char c = s[i];
-    //printf("%c", c);
-
-    int index = c - 97;
-    occ[index]++;
-    //printf("%d \n", index);
-  }
-  printf("\n");
-
-  //printf("%d \n", occ[0]);
-
-
-  for (int i=0; i<26; i++) {
-    char sumn = i + 97;
-    printf("%c: %d \n", sumn, occ[i]);
-  }
-  printf("\n");
-
-
-  return 0;  
-}
-
 typedef struct {
   int count;
   int index;
 } CharInfo;
 
-int firstUniqChar3(char* s) {
+int firstUniqChar2(char* s) {
   CharInfo char_map[256] = {0};
 
   for (int i = 0; s[i] != '\0'; ++i) {
@@ -115,7 +69,8 @@ int firstUniqChar3(char* s) {
   return min_index;
 }
 
-int firstUniqChar4(char* s) {
+// speed 84%, memory 70%
+int firstUniqChar3(char* s) {
   unsigned int occ[26] = {0};
   unsigned int ind[26] = {0};
 
