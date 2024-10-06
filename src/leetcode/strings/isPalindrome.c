@@ -35,41 +35,51 @@ bool isPalindrome(char* s) {
 
   for (unsigned int i=0; i<size; i++) {
     unsigned char c = (unsigned char) s[i];
-    //printf("%d \n", c);
-    // valid range
-    if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
+    printf("%d \n", c);
+
+    if (c >= 65 && c <= 122) {
       if (c >= 97 && c <= 122) {
-        // convert to lower case 
-        c -= 32;
+        checkS[index] = c;
       }
-      printf("c: %d \n", c);
-      checkS[index] = c;
+      if (c >= 65 && c <= 90) {
+        checkS[index] = c+32;
+      }
       index++;
     }
   }
-  printf("index: %d \n", index);
+  printf("\n");
 
-  for (int i=0; i<index; i++) {
-    unsigned int c = (unsigned int) checkS[index];
-    //if (c != 0) {
-      printf("%d \n", c);
-    //}
+  if (index == 0) {
+    // return true;
   }
+
+  unsigned int fp = 0;
+  unsigned int bp = index-1;
+  while (fp < bp) {
+    if (checkS[fp] != checkS[bp]) {
+      return false;
+    }
+    fp++;
+    bp--;
+  }
+  for (int fp=0; fp<index; fp++) {
+    //printf("%c \n", checkS[i]);
+  }
+ 
   return true;
 }
 
 
 int main() {
 
-  char s[] = "A man, a plan, a canal: Panama";
+  //char s[] = "A man, a plan, a canal: Panama";
+  //char s[] = " ";
+  char s[] = "0P";
 
   bool res = isPalindrome(s);
   printf("res: %d\n", res);
 
   printf("\n");
-
-  char c = 'Z';
-  //printf("-> %d", c);
 
   // a -> 97
   // z -> 122

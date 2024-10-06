@@ -1,7 +1,14 @@
 #include <stdio.h>
 
+/*
+ *
+ * Notes:
+ *
+ * sumn
+ * */
 int myAtoi(char* s) {
-    
+  int res = 0;
+  return res;
 }
 
 int main() {
