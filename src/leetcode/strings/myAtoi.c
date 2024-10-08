@@ -1,18 +1,89 @@
+#include <math.h>
 #include <stdio.h>
+#include <string.h>
 
 /*
  *
  * Notes:
  *
- * sumn
+ * ignore whitespaces
+ * determine sign if the next char is '-' or '+' (I assume  () ())
+ *
+ *
+ * if curr character is non-number, stop reading
+ *
+ * 0 -> 48
+ * 0 -> 57
+ * - -> 45
+ * + -> 43
+ *
+ * if char is 43 or 45 -> save sign
+ * ignore leading zero after sign
+ *
+ * if range is not in 48-57
+ * stop reading
+ *
+ * unknown -> how to convert from char to int
+ *
+ * if number is 4 digits (1337)
+ *
+ * 10 ** 3
+ *
  * */
 int myAtoi(char* s) {
   int res = 0;
+  int sumn = 0;
+
+  unsigned int size = strlen(s);
+  for (int i=0; i<size; i++) {
+    unsigned char c = (unsigned char) s[i];
+    printf("%c", c);
+  }
+  printf("\n");
+
   return res;
 }
 
+int exampleAtoi(char* s) {
+  char expl[] = "748293";
+  int length = strlen(expl); // 4
+  for (int i=0; i<length; i++) {
+    printf("%c", expl[i]);
+  }
+  printf("\n");
+ 
+  int res = 0;
+  int currIndex = expl[length-1] - '0';
+  res += currIndex;
+
+  int tenInd = 1;
+  for (int i=0; i<length-1; i++) {
+    tenInd *= 10;
+  }
+
+  for (int i=0; i<length-1; i++) {
+    currIndex = expl[i] - '0';
+    currIndex *= tenInd;
+    res += currIndex;
+    tenInd /= 10;
+  }
+  //printf("%d \n", tenInd);
+  printf("%d \n", res);
+
+
+  return 0;
+}
+
 int main() {
-  printf("Hello, World!\n");
+  //printf("Hello, World!\n");
+
+  unsigned char c = '+';
+  printf("+ -> %d \n", c);
+
+  char s[] = "words and 987";
+  myAtoi(s);
+
+  exampleAtoi(s);
 
   return 0;
 }

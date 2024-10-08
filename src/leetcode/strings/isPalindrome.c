@@ -28,42 +28,49 @@
  *  loop while fp < bp
  *
  * */
+// 8% speed, 19% memory
 bool isPalindrome(char* s) {
   unsigned int size = strlen(s);
-  unsigned int checkS[210] = {0};
+  unsigned int checkS[101010] = {0};
   unsigned int index = 0;
 
   for (unsigned int i=0; i<size; i++) {
     unsigned char c = (unsigned char) s[i];
     printf("%d \n", c);
 
-    if (c >= 65 && c <= 122) {
+    if (c >= 48 && c <= 122) {
       if (c >= 97 && c <= 122) {
         checkS[index] = c;
+        index++;
       }
       if (c >= 65 && c <= 90) {
         checkS[index] = c+32;
+        index++;
       }
-      index++;
+      if (c >= 48 && c <= 57) {
+        checkS[index] = c;
+        index++;
+      }
+      //index++;
     }
   }
   printf("\n");
 
   if (index == 0) {
-    // return true;
+    return true;
   }
 
   unsigned int fp = 0;
   unsigned int bp = index-1;
+  for (int fp=0; fp<index; fp++) {
+    //printf("%c \n", checkS[fp]);
+  }
   while (fp < bp) {
     if (checkS[fp] != checkS[bp]) {
       return false;
     }
     fp++;
     bp--;
-  }
-  for (int fp=0; fp<index; fp++) {
-    //printf("%c \n", checkS[i]);
   }
  
   return true;
@@ -74,7 +81,8 @@ int main() {
 
   //char s[] = "A man, a plan, a canal: Panama";
   //char s[] = " ";
-  char s[] = "0P";
+  //char s[] = "0P";
+  char s[] = "9,8";
 
   bool res = isPalindrome(s);
   printf("res: %d\n", res);
@@ -86,6 +94,7 @@ int main() {
   // A -> 65
   // Z -> 90
   // range -> 65-90, 97-122
+  printf("%d", '9');
 
   return 0;
 }
