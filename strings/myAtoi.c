@@ -1,4 +1,3 @@
-#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -23,13 +22,15 @@
  * if range is not in 48-57
  * stop reading
  *
- * unknown -> how to convert from char to int
+ * unknown -> how to convert from char to int (yay)
  *
  * if number is 4 digits (1337)
  *
  * 10 ** 3
  *
- * */
+ * handle case of negative, non-digits, overflow
+ *
+ // * */
 int myAtoi(char* s) {
   int res = 0;
   int sumn = 0;
@@ -45,13 +46,17 @@ int myAtoi(char* s) {
 }
 
 int exampleAtoi(char* s) {
+  // 1. handle negatives
+  // 2. handle non-digits
+  // 3. handle overflow
   char expl[] = "748293";
   int length = strlen(expl); // 4
+  printf("char string: ");
   for (int i=0; i<length; i++) {
     printf("%c", expl[i]);
   }
   printf("\n");
- 
+
   int res = 0;
   int currIndex = expl[length-1] - '0';
   res += currIndex;
@@ -67,9 +72,20 @@ int exampleAtoi(char* s) {
     res += currIndex;
     tenInd /= 10;
   }
-  //printf("%d \n", tenInd);
-  printf("%d \n", res);
+  // printf("%d \n", tenInd);
+  printf("res integer: %d \n", res);
 
+
+  return 0;
+}
+
+int exampleAtoi2(char* s) {
+  char expl[] = "-748293";
+  int length = strlen(expl); // 4
+  for (int i=0; i<length; i++) {
+    printf("%c", expl[i]);
+  }
+  printf("\n");
 
   return 0;
 }
@@ -84,6 +100,8 @@ int main() {
   myAtoi(s);
 
   exampleAtoi(s);
+
+  exampleAtoi2(s);
 
   return 0;
 }
@@ -100,7 +118,7 @@ The algorithm for myAtoi(string s) is as follows:
 
 Return the integer as the final result.
 
- 
+
 
 Example 1:
 
@@ -173,7 +191,7 @@ Explanation:
 
 Reading stops at the first non-digit character 'w'.
 
- 
+
 
 Constraints:
 
