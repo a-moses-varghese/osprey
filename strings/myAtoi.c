@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 /*
  *
@@ -33,14 +34,32 @@
  // * */
 int myAtoi(char* s) {
   int res = 0;
-  int sumn = 0;
 
-  unsigned int size = strlen(s);
-  for (int i=0; i<size; i++) {
-    unsigned char c = (unsigned char) s[i];
-    printf("%c", c);
+  int sign = 1;
+  int i = 0;
+
+  while (s[i] == ' ') {
+    i++;
   }
-  printf("\n");
+
+  if (s[i] == '-' || s[i] == '+') {
+    sign = (s[i] == '-') ? -1 : 1;
+    i++;
+  }
+
+  for (; s[i] != '\0'; i++) {
+    if (s[i] < '0' || s[i] > '9') {
+      break;
+    }
+
+    if (res > (INT_MAX - (s[i] - '0')) / 10) {
+      return (sign == 1) ? INT_MAX : INT_MIN;
+    }
+
+    res = res * 10 + (s[i] - '0');
+  }
+
+  res *= sign;
 
   return res;
 }
@@ -93,15 +112,14 @@ int exampleAtoi2(char* s) {
 int main() {
   //printf("Hello, World!\n");
 
-  unsigned char c = '+';
-  printf("+ -> %d \n", c);
+  // char s[] = "words and 987";
+  char s[] = "2864";
+  int res = myAtoi(s);
+  printf("result: %d \n", res);
 
-  char s[] = "words and 987";
-  myAtoi(s);
+  // exampleAtoi(s);
 
-  exampleAtoi(s);
-
-  exampleAtoi2(s);
+  // exampleAtoi2(s);
 
   return 0;
 }
